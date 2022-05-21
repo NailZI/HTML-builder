@@ -12,7 +12,7 @@ fs.readdir(dir, { withFileTypes: true }, (err, files) => { // извлечени
         fs.stat(path_to_file, (err, stat) => {
           // console.log(stat.size);
           file.size = stat.size;
-          console.log(file.name + ' -' + file.extension.replace(/[.]/g, ' ') + ' - ' + file.size/1000 + ' kb')
+          console.log(file.name + ' -' + file.extension.replace(/[.]/g, ' ') + ' - ' + file.size)
         });
       }
     });
