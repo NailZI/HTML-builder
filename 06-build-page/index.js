@@ -35,14 +35,13 @@ merge_html();
 async function merge_css() {
   const dir = path.join(__dirname + '\\styles'); // создание пути к папке
   const read_styles = await promises.readdir(dir, { withFileTypes: true });
+  const output_txt = fs.createWriteStream(path.join(__dirname, '\\project-dist\\', 'style.css'));
   for (const style_file of read_styles) {
       if (style_file.isFile() && path.extname(style_file.name) === '.css') {
         let content = fs.createReadStream(path.join(__dirname, '\\styles\\', style_file.name), 'utf-8');
         content.on('data', chunk => {
-          fs.appendFile(path.join(__dirname, '\\project-dist\\', 'style.css'), chunk, err => {
-            if (err) throw err;
-            // console.log('OK')
-          })
+          output_txt.write(chunk);
+          output_txt.write('\n');
         });
       }
     }
